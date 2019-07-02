@@ -1,9 +1,10 @@
 <template>
   <div>
-  <input type="text" class="todo-input" placeholder="what needs to be done" v-model="newTodo" @keyup.enter="addTodo"/>
+  <input type="text" class="todo-input" placeholder="what needs to be done" v-model="newTodo" @keyup.enter="addTodo">
  <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
-   <div>
-     {{ todo.title }}
+   <div class="todo-item-left">
+     <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="todo-item-label">{{ todo.title }}</div>
+     <input v-else class="todo-item-edit" type="text" v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)">
    </div>
 <div class="remove-item" @click="removeTodo(index)">
 &times;
@@ -25,11 +26,13 @@
                 'id':1,
                 'title':'Finish Vue Todo App',
                 'completed':false,
+                'editing':false,
               },
               {
                 'id':2,
                 'title':'Do stuff to this',
                 'completed':false,
+                'editing':false,
               },
             ]
           }
@@ -49,6 +52,15 @@
             this.newTodo = ''
             this.idForTodo++
           },
+
+        editTodo(todo){
+            todo.editing = true
+        },
+
+        doneEdit(todo){
+            todo.editing = false
+        },
+
         removeTodo(index){
             this.todos.splice(index,1)
         }
@@ -82,4 +94,29 @@
       color:red;
     }
   }
+    .todo-item-left { //later
+      display: flex;
+      align-items: center;
+    }
+
+    .todo-item-label {
+      padding: 10px;
+      border: 1px solid white;
+      margin-left: 12px;
+    }
+
+    .todo-item-edit {
+      font-size: 24px;
+      color: #2c3e50;
+      margin-left: 12px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc; //override defaults
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
+      &:focus{
+        outline: 0;
+      }
+    }
+
+
 </style>
