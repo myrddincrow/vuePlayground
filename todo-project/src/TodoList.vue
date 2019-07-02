@@ -1,6 +1,6 @@
 <template>
   <div>
-  <input type="text" class="todo-input" placeholder="what needs to be done" v-model="newTodo" @keyup.enter="addTodo">
+  <input type="text" class="todo-input" placeholder="add new todo item here" v-model="newTodo" @keyup.enter="addTodo">
  <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
     <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
    <div class="todo-item-left">
