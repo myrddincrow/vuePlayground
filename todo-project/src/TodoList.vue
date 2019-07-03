@@ -5,10 +5,13 @@
     <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
    <div class="todo-item-left">
      <input type="checkbox" v-model="todo.completed">
-     <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="todo-item-label" :class="{ completed : todo.completed }">{{ todo.title }}</div>
+     <div class="edit-item" @click="editTodo(todo)">
+       <i class="fa fa-pencil" style="font-size:24px"></i>
+     </div>
+     <div v-if="!todo.editing" @dblclick="editTodo(todo) "class="todo-item-label" :class="{ completed : todo.completed }">{{ todo.title }}</div>
      <input v-else class="todo-item-edit" type="text" v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" v-focus>
    </div>
-<div class="remove-item" @click="removeTodo(index)">
+      <div class="remove-item" @click="removeTodo(index)">
 &times;
 </div>
  </div>
@@ -147,6 +150,7 @@
 
 <style lang="scss">
   @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
  .todo-input{
    width: 100%;
@@ -172,6 +176,12 @@
     margin-left: 14px;
     &:hover{
       color:red;
+    }
+  }  .edit-item {
+    cursor: pointer;
+         margin-left: 14px;
+         &:hover{
+      color:green;
     }
   }
     .todo-item-left { //later
@@ -234,8 +244,5 @@
     opacity: 0;
   }
 
-  body {
-    background-color: lightgrey;
-  }
 
 </style>
