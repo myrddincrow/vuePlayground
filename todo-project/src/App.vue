@@ -1,23 +1,19 @@
 <template>
   <div id="app" class="container">
-    <img class="logo" src="./assets/logo.png">
+    <div style="float: left; width:500px;"><h1>Samson's Todo App</h1></div>
+    <div style="float: left; width:50px;"><img class="logo" src="./assets/logo.png"></div>
     <todo-list></todo-list>
-    <!--<h1>{{ msg }}</h1>-->
 
   </div>
 </template>
 
 <script>
 
+
 import TodoList from "./TodoList";
 export default {
   name: 'app',
-  components: {TodoList},
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
+  components: {TodoList}
 }
 </script>
 
