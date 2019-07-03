@@ -234,8 +234,5 @@
     opacity: 0;
   }
 
-  body {
-    background-color: lightgrey;
-  }
 
 </style>
