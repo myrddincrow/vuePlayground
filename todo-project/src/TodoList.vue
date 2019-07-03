@@ -54,13 +54,7 @@
             todos: [
               {
                 'id':1,
-                'title':'Finish Vue Todo App',
-                'completed':false,
-                'editing':false,
-              },
-              {
-                'id':2,
-                'title':'Do stuff to this',
+                'title':'Todo Sample Item',
                 'completed':false,
                 'editing':false,
               },
