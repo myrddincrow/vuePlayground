@@ -18,7 +18,7 @@
  </transition-group>
 
     <div class="extra-container">
-      <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos"> {{ checkAll }} All</label></div>
+      <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos" ref="selected"> {{ checkAll }} All</label></div>
       <div>{{ remaining }} items left</div>
     </div>
 
@@ -133,20 +133,19 @@
         },
 
         checkAllTodos(){
-            this.todos.forEach((todo) => todo.completed = event.target.checked)
-
-            if(this.checkAll == 'Check'){
-              this.checkAll = 'Uncheck';
-            } else if(this.checkAll == 'Uncheck') {
-              this.checkAll = 'Check';
-            }
-            return this.checkAll
+          this.todos.forEach((todo) => todo.completed = event.target.checked)
+          if (this.$refs.selected.checked == true){
+            return this.checkAll = 'Uncheck'
+          } else {
+            return this.checkAll = 'Check'
+          }
 
         },
 
         clearCompleted(){
             this.todos = this.todos.filter(todo => !todo.completed)
         }
+
 
       }
     }
