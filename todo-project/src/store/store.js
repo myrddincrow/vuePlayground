@@ -76,9 +76,7 @@ export const store = new Vuex.Store({
   },
   actions:{
     addTodo(context, todo){
-      setTimeout(() => {
         context.commit('addTodo', todo)
-      }, 1000)
     },
     updateTodo(context, todo){
       context.commit('updateTodo', todo)
