@@ -54,8 +54,8 @@
         }
       },
       methods: {
-          removeTodo(index) {
-            eventBus.$emit('removedTodo', index)
+          removeTodo(id){
+            this.$store.dispatch('deleteTodo', id)
           },
         editTodo(){
           this.beforeEditCache = this.title;
@@ -66,15 +66,13 @@
             this.title = this.beforeEditCache;
           }
           this.editing = false;
-          eventBus.$emit('finishedEdit', {
-            'index' : this.index,
-            'todo' :{
-              'id': this.id,
-              'title': this.title,
-              'completed': this.completed,
-              'editing': this.editing,
-            }
+          this.$store.dispatch('updateTodo', {
+            'id': this.id,
+            'title': this.title,
+            'completed': this.completed,
+            'editing': this.editing,
           })
+
         },
 
         cancelEdit(){
