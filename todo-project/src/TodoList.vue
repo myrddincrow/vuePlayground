@@ -2,19 +2,8 @@
   <div>
   <input type="text" class="todo-input" placeholder="add new todo item here " v-model="newTodo" @keyup.enter="addTodo">
  <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-    <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
-   <div class="todo-item-left">
-     <input type="checkbox" v-model="todo.completed">
-     <div class="edit-item" @click="editTodo(todo)">
-       <i class="fa fa-pencil" style="font-size:24px"></i>
-     </div>
-     <div v-if="!todo.editing" @dblclick="editTodo(todo) "class="todo-item-label" :class="{ completed : todo.completed }">{{ todo.title }}</div>
-     <input v-else class="todo-item-edit" type="text" v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" v-focus>
-   </div>
-      <div class="remove-item" @click="removeTodo(index)">
-&times;
-</div>
- </div>
+    <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" :checkAll="!anyRemaining" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
+ </todo-item>
  </transition-group>
 
     <div class="extra-container">
@@ -43,8 +32,12 @@
 </template>
 
 <script>
+  import TodoItem from './TodoItem'
     export default {
         name: "TodoList",
+      components: {
+          TodoItem,
+      },
       data (){
           return{
             newTodo:'',
@@ -83,16 +76,6 @@
           return this.todos.filter(todo => todo.completed).length > 0
         }
       },
-
-      directives:{
-          focus:{
-            // directive definition
-            inserted: function (el) {
-              el.focus()
-            }
-          }
-      },
-
       methods: {
           addTodo() {
 
@@ -110,24 +93,6 @@
             this.idForTodo++
           },
 
-        editTodo(todo){
-            this.beforeEditCache = todo.title
-            todo.editing = true
-        },
-
-        doneEdit(todo){
-          if (todo.title.trim() == ''){
-            todo.title = this.beforeEditCache
-          }
-            todo.editing = false
-        },
-
-        cancelEdit(todo){
-          todo.title = this.beforeEditCache
-          todo.editing = false
-
-        },
-
         removeTodo(index){
             this.todos.splice(index,1)
         },
@@ -144,6 +109,10 @@
 
         clearCompleted(){
             this.todos = this.todos.filter(todo => !todo.completed)
+        },
+
+        finishedEdit(data){
+            this.todos.splice(data.index, 1, data.todo)
         }
 
 
