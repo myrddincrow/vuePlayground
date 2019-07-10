@@ -1,5 +1,5 @@
 <template>
-  <div><label><input type="checkbox" :checked="!anyRemaining" @change="allChecked" ref="selected"> {{ checkAll }} All</label></div>
+  <div><label><input type="checkbox" :checked="!anyRemaining" @change="allChecked" ref="selected"> {{ checks }} All</label></div>
 </template>
 
 <script>
@@ -7,7 +7,7 @@
         name: "todo-check-all",
       data (){
         return{
-          checkAll: 'Check',
+          checks: 'Check',
         }
       },
       computed: {
@@ -20,9 +20,9 @@
             this.$store.dispatch('checkAll', event.target.checked)
 
             if (this.$refs.selected.checked == true){
-              return this.checkAll = 'Uncheck'
+              return this.checks = 'Uncheck'
             } else {
-              return this.checkAll = 'Check'
+              return this.checks = 'Check'
             }
           }
       }

@@ -7,7 +7,7 @@
  </transition-group>
 
     <div class="extra-container">
-<todo-check-all></todo-check-all>
+<!--<todo-check-all></todo-check-all>-->
       <todo-remaining></todo-remaining>
     </div>
 
