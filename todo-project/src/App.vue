@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <div style="float: left; width:500px;"><h1>Samson's Todo App</h1></div>
+    <div style="float: left; width:500px;"><h1>Todo App</h1></div>
     <div style="float: left; width:50px;"><img class="logo" src="./assets/logo.png"></div>
     <todo-list></todo-list>
 
